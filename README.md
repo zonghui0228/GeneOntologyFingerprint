@@ -42,23 +42,23 @@ the related code is **step1.2_get_OntologyMapping.py**
 
 Given a gene and a GO term recognized in the corpus, we first calculated the statistical significance of the connectivity of each gene-GO pair using the unadjusted p-value generated from the hypergeometric test.
 
-The mathematical formula is defined in paper, and the code is **caculatePvalue()** defined in **step2_OntologyFingerprint.py**, the results is **./step2_ontofing/lihc/pvalue.csv**
+The mathematical formula is defined in paper, and the code is **caculatePvalue()** defined in **step2_OntologyFingerprint.py**
 
 #### adjust P-value
 
 Second, to convert the p-value into the adjusted p-value, we took into account several noised non-significant gene-GO relationships with the following three situations: i) abstracts that mentioned many genes; ii) abstracts that included general GO terms (e.g., “cell”, GO:0005623); and iii) hotspot genes or well-studied genes (e.g., TP53, and ERBB2) linked to massive biomedical studies. To eliminate these noised non-significant gene-GO relationships, we adopted the adjusted p-value defined by Tsoi LC.
 
-The mathematical formula is defined in paper, and the code is **caculateAdjustedPvalue()** defined in **step2_OntologyFingerprint.py**, the results is **./step2_ontofing/lihc/adjusted_pvalue.csv**
+The mathematical formula is defined in paper, and the code is **caculateAdjustedPvalue()** defined in **step2_OntologyFingerprint.py**
 
 ### step3. Calculate gene-gene similarity score (GGSS) 
 
 The gene-gene similarity score (GGSS) was computed based on a modified inner product algorithm. The GGSS reflects the similarity between two genes, indicating their similar ontology fingerprints in a certain disease.
 
-The mathematical formula is defined in paper, and the code is  **step3_GeneSimilarityScore.py**, the results is **./step3_similarityscore/lihc/genepairs_similarity.txt**.
+The mathematical formula is defined in paper, and the code is  **step3_GeneSimilarityScore.py**.
 
-Furthermore, we determined the GGSS percentile threshold based on prior knowledge of the gene set enrichment analysis (GSEA) annotation file downloaded from [https://www.gsea-msigdb.org/gsea/ index.jsp](https://www.gsea-msigdb.org/gsea/ index.jsp) (**./knol/c5.all.v6.2.symbols.gmt**).
+Furthermore, we determined the GGSS percentile threshold based on prior knowledge of the gene set enrichment analysis (GSEA) annotation file downloaded from https://www.gsea-msigdb.org/gsea/index.jsp (**./knol/c5.all.v6.2.symbols.gmt**).
 
-For each gene-gene pair, we defined a quaternion GGSS (A, B, SS, L), where A and B represent genes A and B, respectively, SS represents the similarity score between genes A and B, and L represents whether genes A and B were annotated in the same GO process in the GSEA. If so, L was labelled 1; otherwise, it was labelled 0. We ranked gene-gene pairs in descending order of the SS and removed those whose SSs were equal to zero. the result in ./step3_similarityscore/lihc/genepairs_similarity_gsea.txt.
+For each gene-gene pair, we defined a quaternion GGSS (A, B, SS, L), where A and B represent genes A and B, respectively, SS represents the similarity score between genes A and B, and L represents whether genes A and B were annotated in the same GO process in the GSEA. If so, L was labelled 1; otherwise, it was labelled 0. We ranked gene-gene pairs in descending order of the SS and removed those whose SSs were equal to zero.
 
 ## **Evaluation of the discrimination ability of the identified gene expression pattern**
 
@@ -66,7 +66,7 @@ To assess the identified genes that might be used for GI cancer classification, 
 
 We generated six different machine learning models with the library ‘sklearn’ in Python: decision tree (DT), k nearest neighbour (kNN), logistic regression (LR), naive Bayesian (NB), random forest (RF) and support vector machine (SVM). The performance of the model was evaluated using the expression of the identified genes as classifiers and the corresponding AUC of each model to determine the discrimination power of the two-classification tasks. We preprocessed the data with MinMaxScale, which scaled the gene expression value to a range between zero and one. Measurements such as accuracy, sensitivity, specificity and F1 score were also used to estimate the performance of the model. To avoid the batch effect of cross-platform gene expression data, we performed a 5-fold cross-validation on the TCGA and ICGC datasets, respectively.
 
-The data is in **./machie_learning_classifier/data/**, the code is in **./machine_learning_classifier/main.ipynb**.
+The code and detailed information are in **./machine_learning_classifier/main.ipynb**.
 
 
 
