@@ -48,11 +48,11 @@ def gene_mapping(infile, outfile):
 
 
 if __name__ == "__main__":
-    # gene_mapping("E:\\data\\OntologyFingerprintData\\GIDB_gene_pubmed\\肝癌修回更新.xlsx", "./step1_mapping/lihc/mapping_gene_abstract.txt")
-    # gene_mapping("E:\\data\\OntologyFingerprintData\\GIDB_gene_pubmed\\胃癌修回更新.xlsx", "./step1_mapping/stad/mapping_gene_abstract.txt")
-    # gene_mapping("E:\\data\\OntologyFingerprintData\\GIDB_gene_pubmed\\胆管癌修回更新.xlsx", "./step1_mapping/chol/mapping_gene_abstract.txt")
-    # gene_mapping("E:\\data\\OntologyFingerprintData\\GIDB_gene_pubmed\\食道癌修回更新.xlsx", "./step1_mapping/esca/mapping_gene_abstract.txt")
-    # gene_mapping("E:\\data\\OntologyFingerprintData\\GIDB_gene_pubmed\\胰腺癌修回更新.xlsx", "./step1_mapping/paad/mapping_gene_abstract.txt")
-    # gene_mapping("E:\\data\\OntologyFingerprintData\\GIDB_gene_pubmed\\肠癌修回更新.xlsx", "./step1_mapping/crc/mapping_gene_abstract.txt")
+    # gene_mapping("./GIDB_gene_pubmed/GIDB_lihc.xlsx", "./step1_mapping/lihc/mapping_gene_abstract.txt")
+    # gene_mapping("./GIDB_gene_pubmed/GIDB_stad.xlsx", "./step1_mapping/stad/mapping_gene_abstract.txt")
+    # gene_mapping("./GIDB_gene_pubmed/GIDB_chol.xlsx", "./step1_mapping/chol/mapping_gene_abstract.txt")
+    # gene_mapping("./GIDB_gene_pubmed/GIDB_esca.xlsx", "./step1_mapping/esca/mapping_gene_abstract.txt")
+    # gene_mapping("./GIDB_gene_pubmed/GIDB_paad.xlsx", "./step1_mapping/paad/mapping_gene_abstract.txt")
+    # gene_mapping("./GIDB_gene_pubmed/GIDB_crc.xlsx", "./step1_mapping/crc/mapping_gene_abstract.txt")
     print("Done!")
 

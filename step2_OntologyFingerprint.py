@@ -2,8 +2,8 @@
 # @Author  : zong hui
 
 # Construct Gene-Ontology Matrix
-# Caculate Pvalue by hypergeometric test
-# Caculate Adjusted-Pvalue
+# calculate Pvalue by hypergeometric test
+# calculate Adjusted-Pvalue
 
 # import pandas as pd
 import scipy.stats as stats
@@ -49,10 +49,10 @@ def build_matrix(genemapping, ontologymapping, abstract_number):
             gene_ontology_matrix[g][o]["d"] = d
 
     return gene, ontology, gene_ontology_matrix
-# build_matrix("./step1_mapping/chol/mapping_gene_abstract.txt", "./step1_mapping/chol/mapping_ontology_abstract.txt", abstract_number = 4642)
+# build_matrix("./step1_mapping/chol/mapping_gene_abstract.txt", "./step1_mapping/chol/mapping_ontology_abstract.txt", abstract_number = 4641)
 
 
-def caculatePvalue(genemapping, ontologymapping, abstract_number, pvalue_file):
+def calculatePvalue(genemapping, ontologymapping, abstract_number, pvalue_file):
 
     gene, ontology, gene_ontology_matrix = build_matrix(genemapping, ontologymapping, abstract_number)
 
@@ -89,16 +89,16 @@ def caculatePvalue(genemapping, ontologymapping, abstract_number, pvalue_file):
         csvfile.close() ################pvalufile
 
     return gene, ontology, gene_ontology_matrix
-# caculatePvalue("./step1_mapping/lihc/mapping_gene_abstract.txt", "./step1_mapping/lihc/mapping_ontology_abstract.txt", 27516, "./step2_ontofing/lihc/pvalue.csv")
-# caculatePvalue("./step1_mapping/stad/mapping_gene_abstract.txt", "./step1_mapping/stad/mapping_ontology_abstract.txt", 25514, "./step2_ontofing/stad/pvalue.csv")
-# caculatePvalue("./step1_mapping/chol/mapping_gene_abstract.txt", "./step1_mapping/chol/mapping_ontology_abstract.txt", 4641, "./step2_ontofing/chol/pvalue.csv")
-# caculatePvalue("./step1_mapping/esca/mapping_gene_abstract.txt", "./step1_mapping/esca/mapping_ontology_abstract.txt", 6001, "./step2_ontofing/esca/pvalue.csv")
-# caculatePvalue("./step1_mapping/paad/mapping_gene_abstract.txt", "./step1_mapping/paad/mapping_ontology_abstract.txt", 18134, "./step2_ontofing/paad/pvalue.csv")
-# caculatePvalue("./step1_mapping/crc/mapping_gene_abstract.txt", "./step1_mapping/crc/mapping_ontology_abstract.txt", 63789, "./step2_ontofing/crc/pvalue.csv")
+# calculatePvalue("./step1_mapping/lihc/mapping_gene_abstract.txt", "./step1_mapping/lihc/mapping_ontology_abstract.txt", 27516, "./step2_ontofing/lihc/pvalue.csv")
+# calculatePvalue("./step1_mapping/stad/mapping_gene_abstract.txt", "./step1_mapping/stad/mapping_ontology_abstract.txt", 25514, "./step2_ontofing/stad/pvalue.csv")
+# calculatePvalue("./step1_mapping/chol/mapping_gene_abstract.txt", "./step1_mapping/chol/mapping_ontology_abstract.txt", 4641, "./step2_ontofing/chol/pvalue.csv")
+# calculatePvalue("./step1_mapping/esca/mapping_gene_abstract.txt", "./step1_mapping/esca/mapping_ontology_abstract.txt", 6001, "./step2_ontofing/esca/pvalue.csv")
+# calculatePvalue("./step1_mapping/paad/mapping_gene_abstract.txt", "./step1_mapping/paad/mapping_ontology_abstract.txt", 18134, "./step2_ontofing/paad/pvalue.csv")
+# calculatePvalue("./step1_mapping/crc/mapping_gene_abstract.txt", "./step1_mapping/crc/mapping_ontology_abstract.txt", 63789, "./step2_ontofing/crc/pvalue.csv")
 
-def caculateAdjustedPvalue(genemapping, ontologymapping, abstract_number, adjusted_file):
+def calculateAdjustedPvalue(genemapping, ontologymapping, abstract_number, adjusted_file):
 
-    gene, ontology, gene_ontology_matrix = caculatePvalue(genemapping, ontologymapping, abstract_number, pvalue_file=False)
+    gene, ontology, gene_ontology_matrix = calculatePvalue(genemapping, ontologymapping, abstract_number, pvalue_file=False)
 
     csvfile = open(adjusted_file, 'w', newline='')
     writer = csv.writer(csvfile)
@@ -133,12 +133,12 @@ def caculateAdjustedPvalue(genemapping, ontologymapping, abstract_number, adjust
     csvfile.close()
     return gene, ontology, gene_ontology_matrix
 
-# caculateAdjustedPvalue("./step1_mapping/lihc/mapping_gene_abstract.txt", "./step1_mapping/lihc/mapping_ontology_abstract.txt", 27516, "./step2_ontofing/lihc/adjusted_pvalue.csv")
-# caculateAdjustedPvalue("./step1_mapping/stad/mapping_gene_abstract.txt", "./step1_mapping/stad/mapping_ontology_abstract.txt", 25514, "./step2_ontofing/stad/adjusted_pvalue.csv")
-# caculateAdjustedPvalue("./step1_mapping/chol/mapping_gene_abstract.txt", "./step1_mapping/chol/mapping_ontology_abstract.txt", 4641, "./step2_ontofing/chol/adjusted_pvalue.csv")
-# caculateAdjustedPvalue("./step1_mapping/esca/mapping_gene_abstract.txt", "./step1_mapping/esca/mapping_ontology_abstract.txt", 6001, "./step2_ontofing/esca/adjusted_pvalue.csv")
-# caculateAdjustedPvalue("./step1_mapping/paad/mapping_gene_abstract.txt", "./step1_mapping/paad/mapping_ontology_abstract.txt", 18134, "./step2_ontofing/paad/adjusted_pvalue.csv")
-# caculateAdjustedPvalue("./step1_mapping/crc/mapping_gene_abstract.txt", "./step1_mapping/crc/mapping_ontology_abstract.txt", 63789, "./step2_ontofing/crc/adjusted_pvalue.csv")
+# calculateAdjustedPvalue("./step1_mapping/lihc/mapping_gene_abstract.txt", "./step1_mapping/lihc/mapping_ontology_abstract.txt", 27516, "./step2_ontofing/lihc/adjusted_pvalue.csv")
+# calculateAdjustedPvalue("./step1_mapping/stad/mapping_gene_abstract.txt", "./step1_mapping/stad/mapping_ontology_abstract.txt", 25514, "./step2_ontofing/stad/adjusted_pvalue.csv")
+# calculateAdjustedPvalue("./step1_mapping/chol/mapping_gene_abstract.txt", "./step1_mapping/chol/mapping_ontology_abstract.txt", 4641, "./step2_ontofing/chol/adjusted_pvalue.csv")
+# calculateAdjustedPvalue("./step1_mapping/esca/mapping_gene_abstract.txt", "./step1_mapping/esca/mapping_ontology_abstract.txt", 6001, "./step2_ontofing/esca/adjusted_pvalue.csv")
+# calculateAdjustedPvalue("./step1_mapping/paad/mapping_gene_abstract.txt", "./step1_mapping/paad/mapping_ontology_abstract.txt", 18134, "./step2_ontofing/paad/adjusted_pvalue.csv")
+# calculateAdjustedPvalue("./step1_mapping/crc/mapping_gene_abstract.txt", "./step1_mapping/crc/mapping_ontology_abstract.txt", 63789, "./step2_ontofing/crc/adjusted_pvalue.csv")
 
 
 

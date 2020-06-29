@@ -47,7 +47,7 @@ def get_UMLS_GOinfo(infile, outfile):
 
 
 # ==========================================================
-# get the pubmed set linked at least one gene
+# filter out the abstract,, get the pubmed set linked at least one gene
 def pubmed(gene_mapping):
     pubmed_set = set()
     with open(gene_mapping, 'r') as f:
@@ -111,37 +111,37 @@ def ontology_mapping(folder_path, outfile, pubmeds):
 
 if __name__ == "__main__":
     # ===========================================LIHC================================================
-    # folder_path = "E:\\data\\OntologyFingerprintData\\medline_raw_metamap\\LIHC_metamap_cancerfilter_all"
+    # folder_path = "./medline_raw_metamap/LIHC_metamap_cancerfilter_all"
     # outfile = "./step1_mapping/lihc/mapping_ontology_abstract.txt"
     # pubmeds = pubmed("./step1_mapping/lihc/mapping_gene_abstract.txt")
     # ontology_mapping(folder_path, outfile, pubmeds)
 
     # ===========================================STAD================================================
-    # folder_path = "E:\\data\\OntologyFingerprintData\\medline_raw_metamap\\STAD_metamap_cancerfilter_all"
+    # folder_path = "./medline_raw_metamap/STAD_metamap_cancerfilter_all"
     # outfile = "./step1_mapping/stad/mapping_ontology_abstract.txt"
     # pubmeds = pubmed("./step1_mapping/stad/mapping_gene_abstract.txt")
     # ontology_mapping(folder_path, outfile, pubmeds)
 
     # ===========================================CHOL================================================
-    # folder_path = "E:\\data\\OntologyFingerprintData\\medline_raw_metamap\\CHOL_metamap_cancerfilter_all"
+    # folder_path = "./medline_raw_metamap/CHOL_metamap_cancerfilter_all"
     # outfile = "./step1_mapping/chol/mapping_ontology_abstract.txt"
     # pubmeds = pubmed("./step1_mapping/chol/mapping_gene_abstract.txt")
     # ontology_mapping(folder_path, outfile, pubmeds)
 
     # ===========================================ESCA================================================
-    # folder_path = "E:\\data\\OntologyFingerprintData\\medline_raw_metamap\\ESCA_metamap_cancerfilter_all"
+    # folder_path = "./medline_raw_metamap/ESCA_metamap_cancerfilter_all"
     # outfile = "./step1_mapping/esca/mapping_ontology_abstract.txt"
     # pubmeds = pubmed("./step1_mapping/esca/mapping_gene_abstract.txt")
     # ontology_mapping(folder_path, outfile, pubmeds)
 
     # ===========================================PAAD================================================
-    # folder_path = "E:\\data\\OntologyFingerprintData\\medline_raw_metamap\\PAAD_metamap_cancerfilter_all"
+    # folder_path = "./medline_raw_metamap/PAAD_metamap_cancerfilter_all"
     # outfile = "./step1_mapping/paad/mapping_ontology_abstract.txt"
     # pubmeds = pubmed("./step1_mapping/paad/mapping_gene_abstract.txt")
     # ontology_mapping(folder_path, outfile, pubmeds)
 
     # ===========================================CRC================================================
-    # folder_path = "E:\\data\\OntologyFingerprintData\\medline_raw_metamap\\CRC_metamap_cancerfilter_all"
+    # folder_path = "./medline_raw_metamap/CRC_metamap_cancerfilter_all"
     # outfile = "./step1_mapping/crc/mapping_ontology_abstract.txt"
     # pubmeds = pubmed("./step1_mapping/crc/mapping_gene_abstract.txt")
     # ontology_mapping(folder_path, outfile, pubmeds)

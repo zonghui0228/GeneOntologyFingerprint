@@ -86,3 +86,62 @@ def gene_gene_similarity(infile, outfile):
 # gene_gene_similarity(infile="./step2_ontofing/paad/adjusted_pvalue.csv", outfile="./step3_similarityscore/paad/genepairs_similarity.txt")
 # gene_gene_similarity(infile="./step2_ontofing/stad/adjusted_pvalue.csv", outfile="./step3_similarityscore/stad/genepairs_similarity.txt")
 
+####################使用从GSEA下载的数据（c5.all.v6.2.symbols），使用同样的方法计算相似性。####################
+def gsea_gene_similarity(infile):
+    gene_go = {}
+    with open(infile, 'r') as f:
+        for line in f:
+            l = line.strip().split("\t")
+            for g in l[2:]:
+                if g not in gene_go: gene_go[g] = [l[0]]
+                else: gene_go[g].append(l[0])
+    print(len(gene_go))
+    return gene_go
+# gene_go = gsea_gene_similarity("./knol/c5.all.v6.2.symbols.gmt")
+
+def add_annotation_to_similarity_score(infile, outfile):
+    gene_go = gsea_gene_similarity("./knol/c5.all.v6.2.symbols.gmt")
+    with open(outfile, "w") as outf:
+        with open(infile, "r") as inf:
+            header = inf.readline().strip().split(",")
+            outf.write("{},{},{},{}\n".format(header[0], header[1], header[2], "GSEA"))
+            n = 0
+            for line in inf:
+                n += 1
+                if n%1000==0: print(n)
+                l = line.strip().split(",")
+                if l[0] in gene_go and l[1] in gene_go:
+                    shared_go = set(gene_go[l[0]]) & set(gene_go[l[1]])
+                    outf.write("{},{},{},{}\n".format(l[0], l[1], l[2], len(shared_go)))
+                else:
+                    outf.write("{},{},{},{}\n".format(l[0], l[1], l[2], "NA"))
+
+# add_annotation_to_similarity_score("./step3_similarityscore/chol/genepairs_similarity.txt", "./step3_similarityscore/chol/genepairs_similarity_gsea.txt")
+# add_annotation_to_similarity_score("./step3_similarityscore/crc/genepairs_similarity.txt", "./step3_similarityscore/crc/genepairs_similarity_gsea.txt")
+# add_annotation_to_similarity_score("./step3_similarityscore/esca/genepairs_similarity.txt", "./step3_similarityscore/esca/genepairs_similarity_gsea.txt")
+# add_annotation_to_similarity_score("./step3_similarityscore/lihc/genepairs_similarity.txt", "./step3_similarityscore/lihc/genepairs_similarity_gsea.txt")
+# add_annotation_to_similarity_score("./step3_similarityscore/paad/genepairs_similarity.txt", "./step3_similarityscore/paad/genepairs_similarity_gsea.txt")
+# add_annotation_to_similarity_score("./step3_similarityscore/stad/genepairs_similarity.txt", "./step3_similarityscore/stad/genepairs_similarity_gsea.txt")
+
+
+# 筛选前p(百分比)的gene-gene similarity score,并保留有GSEA注释的例子!.
+def percentile(infile, outfile, p):
+    with open(infile, 'r') as inf:
+        lines = inf.readlines()
+    cadidate_lines = lines[:int(len(lines)*p)] # 筛选前p%的数据
+    print("gene-gene similarity scores in {}%：{}".format(p*100, len(cadidate_lines)))
+    n = 0
+    with open(outfile, 'w') as outf:
+        for line in cadidate_lines:
+            l = line.strip().split(",")
+            if l[3] not in ["0", "NA"]:
+                outf.write("{},{},{}\n".format(l[0],l[1],l[2]))
+                n += 1
+    print("gene-gene similarity scores in {}% and annotated in GSEA: {}".format(p*100, n))
+
+# percentile("./step3_similarityscore/chol/genepairs_similarity_gsea.txt","./step3_similarityscore/chol/genepairs_similarity_gsea_001.txt",p=0.01)
+# percentile("./step3_similarityscore/crc/genepairs_similarity_gsea.txt","./step3_similarityscore/crc/genepairs_similarity_gsea_001.txt",p=0.01)
+# percentile("./step3_similarityscore/esca/genepairs_similarity_gsea.txt","./step3_similarityscore/esca/genepairs_similarity_gsea_001.txt",p=0.01)
+# percentile("./step3_similarityscore/lihc/genepairs_similarity_gsea.txt","./step3_similarityscore/lihc/genepairs_similarity_gsea_001.txt",p=0.01)
+# percentile("./step3_similarityscore/paad/genepairs_similarity_gsea.txt","./step3_similarityscore/paad/genepairs_similarity_gsea_001.txt",p=0.01)
+# percentile("./step3_similarityscore/stad/genepairs_similarity_gsea.txt","./step3_similarityscore/stad/genepairs_similarity_gsea_001.txt",p=0.01)
